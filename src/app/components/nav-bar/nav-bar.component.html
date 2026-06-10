@@ -1,0 +1,82 @@
+<!-- Sidebar Navigation Component (Receiver) -->
+<aside class="w-[200px] bg-white border-r border-[#b5d4f4] py-3.5 font-sarabun min-h-[580px]">
+  <!-- เมนูหลัก -->
+  <div class="px-2.5 mb-2">
+    <p class="text-[10px] font-bold text-[#4a6080] uppercase tracking-wider px-2 mb-1">เมนูหลัก</p>
+    <div
+    routerLink="/index"
+    routerLinkActive="!text-[#0c2d5e] !bg-[#f4f7fb] border border-navy"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="flex items-center gap-2 px-2.5 py-2 rounded-lg text-[13px] text-[#4a6080] hover:bg-[#f4f7fb] hover:text-[#0c2d5e] transition-colors mt-0.5 cursor-pointer">
+        <i class="ti ti-inbox text-[15px]"></i>Inbox
+      <!-- <span class="ml-auto bg-[#c0392b] text-white rounded-md px-1.5 py-0.5 text-[10px] font-bold">5</span> -->
+    </div>
+    <div 
+    routerLink="/list"
+    routerLinkActive="!text-[#0c2d5e] !bg-[#f4f7fb]  border border-navy"
+    class="flex items-center gap-2 px-2.5 py-2 rounded-lg text-[13px] text-[#4a6080] hover:bg-[#f4f7fb] hover:text-[#0c2d5e] transition-colors mt-0.5 cursor-pointer">
+     <i class="ti ti-list-check"></i>รายการทั้งหมด
+     <!-- <span class="ml-auto bg-[#1a5fa8] text-white rounded-md px-1.5 py-0.5 text-[10px] font-bold">8</span> -->
+    </div>
+    <div routerLink="/history"
+    routerLinkActive="!text-[#0c2d5e] !bg-[#f4f7fb]  border border-navy"
+    class="flex items-center gap-2 px-2.5 py-2 rounded-lg text-[13px] text-[#4a6080] hover:bg-[#f4f7fb] hover:text-[#0c2d5e] transition-colors mt-0.5 cursor-pointer">
+    <i class="ti ti-history"></i>ประวัติการรักษา
+     <!-- <span class="ml-auto bg-[#1a5fa8] text-white rounded-md px-1.5 py-0.5 text-[10px] font-bold">8</span> -->
+    </div>
+  </div>
+  <hr class="h-px bg-[#b5d4f4] border-none my-2 mx-2.5">
+  
+  <!-- แผนก -->
+  <div class="px-2.5 mb-2">
+    <p class="text-[10px] font-bold text-[#4a6080] uppercase tracking-wider px-2 mb-1">ติดตาม</p>
+ <div class="flex items-center gap-2 px-2.5 py-2 rounded-lg text-[13px] text-[#4a6080] hover:bg-[#f4f7fb] hover:text-[#0c2d5e] transition-colors mt-0.5 cursor-pointer">
+       1
+      <!-- <span class="ml-auto bg-[#c0392b] text-white rounded-md px-1.5 py-0.5 text-[10px] font-bold">5</span> -->
+    </div>
+    <div class="flex items-center gap-2 px-2.5 py-2 rounded-lg text-[13px] text-[#4a6080] hover:bg-[#f4f7fb] hover:text-[#0c2d5e] transition-colors mt-0.5 cursor-pointer">
+      2
+      <!-- <span class="ml-auto bg-[#1a5fa8] text-white rounded-md px-1.5 py-0.5 text-[10px] font-bold">8</span> -->
+    </div>
+    <div class="flex items-center gap-2 px-2.5 py-2 rounded-lg text-[13px] text-[#4a6080] hover:bg-[#f4f7fb] hover:text-[#0c2d5e] transition-colors mt-0.5 cursor-pointer">
+     3
+     <!-- <span class="ml-auto bg-[#1a5fa8] text-white rounded-md px-1.5 py-0.5 text-[10px] font-bold">8</span> -->
+    </div>
+    <div class="flex items-center gap-2 px-2.5 py-2 rounded-lg text-[13px] text-[#4a6080] hover:bg-[#f4f7fb] hover:text-[#0c2d5e] transition-colors mt-0.5 cursor-pointer">
+    4
+     <!-- <span class="ml-auto bg-[#1a5fa8] text-white rounded-md px-1.5 py-0.5 text-[10px] font-bold">8</span> -->
+    </div>
+  </div>
+  
+  <!-- Feedback -->
+  <div class="px-2.5 mb-2">
+    <p class="text-[10px] font-bold text-[#4a6080] uppercase tracking-wider px-2 mb-1">feedback</p>
+    <div class="flex items-center gap-2 px-2.5 py-2 rounded-lg text-[13px] text-[#4a6080] hover:bg-[#f4f7fb] hover:text-[#0c2d5e] transition-colors mt-0.5 cursor-pointer">
+       1
+      <!-- <span class="ml-auto bg-[#c0392b] text-white rounded-md px-1.5 py-0.5 text-[10px] font-bold">5</span> -->
+    </div>
+    <div class="flex items-center gap-2 px-2.5 py-2 rounded-lg text-[13px] text-[#4a6080] hover:bg-[#f4f7fb] hover:text-[#0c2d5e] transition-colors mt-0.5 cursor-pointer">
+      2
+      <!-- <span class="ml-auto bg-[#1a5fa8] text-white rounded-md px-1.5 py-0.5 text-[10px] font-bold">8</span> -->
+    </div>
+    <div class="flex items-center gap-2 px-2.5 py-2 rounded-lg text-[13px] text-[#4a6080] hover:bg-[#f4f7fb] hover:text-[#0c2d5e] transition-colors mt-0.5 cursor-pointer">
+     3
+     <!-- <span class="ml-auto bg-[#1a5fa8] text-white rounded-md px-1.5 py-0.5 text-[10px] font-bold">8</span> -->
+    </div>
+    <div class="flex items-center gap-2 px-2.5 py-2 rounded-lg text-[13px] text-[#4a6080] hover:bg-[#f4f7fb] hover:text-[#0c2d5e] transition-colors mt-0.5 cursor-pointer">
+    4
+     <!-- <span class="ml-auto bg-[#1a5fa8] text-white rounded-md px-1.5 py-0.5 text-[10px] font-bold">8</span> -->
+    </div>
+  </div>
+  <hr class="h-px bg-[#b5d4f4] border-none my-2 mx-2.5">
+  
+  <!-- ตั้งค่าระบบ -->
+  <div class="px-2.5">
+    <div class="flex items-center gap-2 px-2.5 py-2 rounded-lg text-[13px] text-[#4a6080] hover:bg-[#f4f7fb] hover:text-[#0c2d5e] transition-colors cursor-pointer">
+      <i class="ti ti-settings text-[15px]" aria-hidden="true"></i> ตั้งค่าระบบ
+    </div>
+    <div class="flex items-center gap-2 px-2.5 py-2 rounded-lg text-[13px] text-[#4a6080] hover:bg-[#f4f7fb] hover:text-[#0c2d5e] transition-colors mt-0.5 cursor-pointer">
+      <i class="ti ti-logout text-[15px]" aria-hidden="true"></i> ออกจากระบบ
+    </div>
+  </div>
+</aside>

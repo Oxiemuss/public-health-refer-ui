@@ -1,0 +1,16 @@
+<div class="flex flex-col h-screen w-screen overflow-hidden">
+  
+  <app-top-bar class="block shrink-0"></app-top-bar>
+
+  <div class="flex flex-row flex-1 h-[calc(100vh-52px)] overflow-hidden">
+    
+    <app-nav-bar class="block w-[200px] h-full shrink-0"></app-nav-bar>
+
+    <main class="flex-1 h-full p-4 overflow-y-auto">
+      
+      <router-outlet></router-outlet>
+      
+    </main>
+
+  </div>
+</div>
