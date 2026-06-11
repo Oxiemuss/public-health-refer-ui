@@ -1,1 +1,93 @@
-<p>list-screen works!</p>
+<div class="flex gap-2 mb-3 shrink-0">
+  <div class="w-full flex flex-row border border-navy-light rounded-xl">
+    <i class="ti ti-search text-[15px] self-center p-2"></i>
+    <input
+      class="w-full rounded-xl text-[12px] bg-white outline-none"
+      placeholder="ค้นหาผู้ป่วย — ชื่อ,เลขบัตร, รพ.สต.ต้นทาง..."
+    />
+  </div>
+  <button
+    class="border border-[#1a5fa8] bg-[#e6f1fb] text-[#0c2d5e] font-bold rounded-full px-3 py-1 text-[11px] cursor-pointer"
+  >
+    ทั้งหมด
+  </button>
+  <button
+    class="border border-sky bg-white text-[#4a6080] rounded-full px-3 py-1 text-[11px] cursor-pointer hover:bg-gray-50"
+  >
+    ฉุกเฉิน
+  </button>
+  <button
+    class="border border-sky bg-white text-[#4a6080] rounded-full px-3 py-1 text-[11px] cursor-pointer hover:bg-gray-50"
+  >
+    รอตอบรับ
+  </button>
+</div>
+<div class="flex-1 grid grid-cols-12 gap-3 overflow-hidden min-h-0">
+  <div class="col-span-5 h-full overflow-y-auto space-y-2 pr-1">
+    <div class="bg-white rounded-xl border border-sky p-3 cursor-pointer hover:border-[#1a5fa8]">
+      <div class="flex items-center justify-between mb-1">
+        <span class="text-[11px] font-bold text-[#1a5fa8]">#REF-2568-0410</span>
+        <span class="text-[10px] text-[#4a6080]">08:05 น.</span>
+      </div>
+      <div>
+        <h4 class="text-[13.5px] font-semibold text-[#0f1e35]">เด็กชาย มานะ รักดี</h4>
+        <p class="text-[10.5px] text-[#4a6080]">HN: 009012 · อายุ 7 ปี</p>
+      </div>
+      <div class="flex gap-1 mt-2 flex-wrap text-[10px]">
+        <span class="bg-[#eaf5ee] text-[#0f5e2e] rounded px-1.5 py-0.5 font-semibold"
+          >รพ.สต.หนองบัว</span
+        >
+        <span class="bg-[#f0f4fa] text-[#4a6080] rounded px-1.5 py-0.5 font-semibold"
+          >Pneumonia</span
+        >
+      </div>
+    </div>
+  </div>
+  <div class="col-span-7 h-full bg-white rounded-xl border border-sky p-3.5 overflow-y-auto">
+    <h3
+      class="text-[13px] font-bold text-[#0c2d5e] pb-2 mb-3 border-b border-sky flex items-center gap-1.5"
+    >
+      <i class="ti ti-clipboard-text text-[15px]"></i> รายละเอียดใบส่งตัวคัดเลือก
+    </h3>
+
+    <div class="bg-[#e6f1fb] rounded-lg p-2.5 px-3 mb-3">
+      <h4 class="text-[14px] font-bold text-[#0c2d5e]">นาย สมชาย ใจดี</h4>
+      <p class="text-[11px] text-[#4a6080] mt-0.5">
+        HN: 001234 · เลขบัตร: 3-7201-xxxxx-xx-x · อายุ 58 ปี
+      </p>
+    </div>
+
+    <div class="space-y-0.5 text-[11.5px] mb-4">
+      <div class="flex justify-between py-1.5 border-b border-[#eef3f9]">
+        <span class="text-[#4a6080]">รพ.สต. ต้นทาง</span>
+        <span class="font-semibold text-[#0f1e35]">รพ.สต.บ้านโพธิ์</span>
+      </div>
+      <div class="flex justify-between py-1.5 border-b border-[#eef3f9]">
+        <span class="text-[#4a6080]">Diagnosis หลัก</span>
+        <span class="font-semibold text-[#c0392b]">Chest pain, Hypertension</span>
+      </div>
+      <div class="flex justify-between py-1.5 border-b border-[#eef3f9]">
+        <span class="text-[#4a6080]">แพทย์ผู้ส่งต่อ</span>
+        <span class="font-semibold text-[#0f1e35]">นพ.ธนวัฒน์ รักษ์ดี</span>
+      </div>
+    </div>
+
+    <div class="border-t border-sky pt-3">
+      <p class="text-[11px] font-bold text-[#4a6080] mb-2 uppercase tracking-wider">
+        ดำเนินการรับเคส
+      </p>
+      <div class="grid grid-cols-2 gap-2">
+        <button
+          class="bg-[#1a7a4a] text-white rounded-lg py-2 text-[12px] font-bold cursor-pointer hover:bg-[#15633c]"
+        >
+          <i class="ti ti-check"></i> ตอบรับใบส่งตัว
+        </button>
+        <button
+          class="border border-[#c0392b] text-[#c0392b] bg-transparent rounded-lg py-2 text-[12px] font-bold cursor-pointer hover:bg-[#fdecea]"
+        >
+          <i class="ti ti-x"></i> ปฏิเสธเคส
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
