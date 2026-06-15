@@ -4,7 +4,6 @@ import { MainScreenComponent } from './pages/main-screen/main-screen.component';
 import { HisScreenComponent } from './pages/his-screen/his-screen.component';
 import { ListScreenComponent } from './pages/list-screen/list-screen.component';
 import { CreateReferComponent } from './pages/create-refer/create-refer.component';
-import { SendReferComponent } from './pages/send-refer/send-refer.component';
 
 export const routes: Routes = [
 {path:'', pathMatch:'full', redirectTo:'index'},
@@ -12,7 +11,6 @@ export const routes: Routes = [
 {path:'list', component:ListScreenComponent},
 {path:'history', component:HisScreenComponent},
 {path:'refer', component:CreateReferComponent},
-{path:'sendrefer', component:SendReferComponent},
 ];
 
 

@@ -1,4 +1,4 @@
-<div class="w-full h-full flex flex-col overflow-hidden font-sarabun text-navy">
+<div class="w-full h-full flex flex-col overflow-hidden text-navy">
   <div
     class="bg-navy text-white rounded-xl p-3.5 px-5 mb-4 flex items-center justify-between shrink-0 border-b-2 border-gold shadow-sm"
   >
@@ -17,467 +17,686 @@
         </p>
       </div>
     </div>
+    <div class="bg-red-500 m-2 p-1 text-[13px] rounded-md text-white shrink-0">
+      <i class="ti ti-file-type-pdf"></i>
+      <button type="button" class="cursor-pointer">บันทึกเป็น PDF</button>
+    </div>
   </div>
 
-  <div class="flex-1 overflow-y-auto pr-1 space-y-4 pb-6">
-    <div class="bg-white rounded-xl border border-navy/15 p-4 shadow-sm grid grid-cols-12 gap-3">
-      <div class="col-span-12 border-b border-gray-100 pb-1.5 mb-1">
-        <h3 class="text-[13px] font-bold text-navy flex items-center gap-1.5">ข้อมูลหน่วยงาน</h3>
-      </div>
-      <div class="col-span-6">
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
-          >โรงพยาบาลส่งเสริมสุขภาพตำบล (รพ.สต.) ต้นทาง</label
-        >
-        <input
-          type="text"
-          class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold bg-gray-50"
-          placeholder="ระบุชื่อ รพ.สต. ต้นทาง"
-        />
-      </div>
-      <div class="col-span-6">
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1">เลขที่หนังสือ</label>
-        <input
-          type="text"
-          class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
-          placeholder="ระบุเลขที่หนังสือ"
-        />
-      </div>
-      <div class="col-span-6">
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
-          >เรียน (ผู้อำนวยการโรงพยาบาลปลายทาง)</label
-        >
-        <input
-          type="text"
-          class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
-          placeholder="ระบุชื่อโรงพยาบาลปลายทาง"
-        />
-      </div>
-      <div class="col-span-6">
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1">วันที่ส่งต่อ</label>
-        <div class="flex justify-between">
+  <form
+    [formGroup]="referForm"
+    (ngSubmit)="onSubmit()"
+    class="flex-1 flex flex-col overflow-hidden"
+  >
+    <div class="flex-1 overflow-y-auto pr-2 space-y-4 pb-4">
+
+      <div class="bg-white rounded-xl border border-navy/15 p-4 shadow-sm grid grid-cols-12 gap-3">
+        <div class="col-span-12 border-b border-gray-100 pb-1.5 mb-1">
+          <h3 class="text-[13px] font-bold text-navy flex items-center gap-1.5">ข้อมูลหน่วยงาน</h3>
+        </div>
+        <div class="col-span-6">
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
+            >โรงพยาบาลส่งเสริมสุขภาพตำบล (รพ.สต.) ต้นทาง</label
+          >
           <input
-            class="border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold text-navy"
-            placeholder="วัน"
+            type="text"
+            formControlName="from_hcode"
+            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold bg-gray-50"
+            placeholder="ระบุชื่อ รพ.สต. ต้นทาง"
           />
-          /
+        </div>
+        <div class="col-span-6">
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1">เลขที่หนังสือ</label>
           <input
-            class="border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold text-navy"
-            placeholder="เดือน"
+            type="text"
+            formControlName="refer_num"
+            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
+            [ngClass]="{
+              'border-red-400 bg-red-50':
+                referForm.get('refer_num')?.invalid && referForm.get('refer_num')?.touched
+            }"
+            placeholder="ระบุเลขที่หนังสือ"
           />
-          /
+        </div>
+        <div class="col-span-6">
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
+            >เรียน (ผู้อำนวยการโรงพยาบาลปลายทาง)</label
+          >
+          <select
+            formControlName="to_hcode"
+            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold text-navy bg-white"
+            [ngClass]="{
+              'border-red-400 bg-red-50':
+                referForm.get('to_hcode')?.invalid && referForm.get('to_hcode')?.touched
+            }"
+          >
+            <option value="">-- เลือกโรงพยาบาลปลายทาง --</option>
+            <option value="10678">โรงพยาบาลศูนย์เจ้าพระยายมราช</option>
+            <option value="10733">โรงพยาบาลสมเด็จพระสังฆราช องค์ที่ 17 (สองพี่น้อง)</option>
+            <option value="11289">โรงพยาบาลเดิมบางนางบวช</option>
+            <option value="11290">โรงพยาบาลด่านช้าง</option>
+            <option value="11291">โรงพยาบาลบางปลาม้า</option>
+            <option value="11292">โรงพยาบาลศรีประจันต์</option>
+            <option value="11293">โรงพยาบาลดอนเจดีย์</option>
+            <option value="11294">โรงพยาบาลสามชุก</option>
+            <option value="11295">โรงพยาบาลอู่ทอง</option>
+            <option value="11296">โรงพยาบาลหนองหญ้าไซ</option>
+          </select>
+        </div>
+        <div class="col-span-3">
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1">วันที่ส่งต่อ</label>
+          <div class="flex justify-between items-center gap-1">
+            <input
+              type="text"
+              (input)="onDatePartChange()"
+              #dayInput
+              class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold text-navy text-center"
+              [ngClass]="{
+                'border-red-400 bg-red-50':
+                  referForm.get('refer_date')?.invalid && referForm.get('refer_date')?.touched
+              }"
+              placeholder="วัน"
+              maxLength="2"
+            />
+            /
+            <select
+              (change)="onDatePartChange()"
+              #monthSelect
+              class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold text-navy bg-white"
+              [ngClass]="{
+                'border-red-400 bg-red-50':
+                  referForm.get('refer_date')?.invalid && referForm.get('refer_date')?.touched
+              }"
+            >
+              <option value="">เลือกเดือน</option>
+              <option value="01">มกราคม</option>
+              <option value="02">กุมภาพันธ์</option>
+              <option value="03">มีนาคม</option>
+              <option value="04">เมษายน</option>
+              <option value="05">พฤษภาคม</option>
+              <option value="06">มิถุนายน</option>
+              <option value="07">กรกฎาคม</option>
+              <option value="08">สิงหาคม</option>
+              <option value="09">กันยายน</option>
+              <option value="10">ตุลาคม</option>
+              <option value="11">พฤศจิกายน</option>
+              <option value="12">ธันวาคม</option>
+            </select>
+            /
+            <input
+              type="text"
+              (input)="onDatePartChange()"
+              #yearInput
+              class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold text-navy text-center"
+              [ngClass]="{
+                'border-red-400 bg-red-50':
+                  referForm.get('refer_date')?.invalid && referForm.get('refer_date')?.touched
+              }"
+              placeholder="ปี"
+              maxLength="4"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl border border-navy/15 p-4 shadow-sm grid grid-cols-12 gap-3">
+        <div class="col-span-12 border-b border-gray-100 pb-1.5 mb-1">
+          <h3 class="text-[13px] font-bold text-navy flex items-center gap-1.5">
+            ข้อมูลผู้ป่วยและสิทธิการรักษา
+          </h3>
+        </div>
+        <div class="col-span-4">
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
+            >ชื่อ - สกุล ผู้ป่วย</label
+          >
           <input
-            class="border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold text-navy"
+            type="text"
+            formControlName="full_name"
+            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
+            [ngClass]="{
+              'border-red-400 bg-red-50':
+                referForm.get('full_name')?.invalid && referForm.get('full_name')?.touched
+            }"
+            placeholder="นาย / นาง / นางสาว ..."
+          />
+        </div>
+        <div class="col-span-4">
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
+            >เลขบัตรประจำตัวประชาชน</label
+          >
+          <input
+            type="text"
+            formControlName="cid"
+            inputmode="numeric"
+            maxLength="13"
+            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
+            [ngClass]="{
+              'border-red-400 bg-red-50':
+                referForm.get('cid')?.invalid && referForm.get('cid')?.touched
+            }"
+            placeholder="X-XXXX-XXXXX-XX-X"
+          />
+        </div>
+        <div class="col-span-2">
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1">เพศ</label>
+          <div class="flex items-center gap-4 h-[38px]">
+            <label class="flex items-center gap-1.5 text-[12.5px] cursor-pointer">
+              <input type="radio" formControlName="gender" value="ชาย" class="accent-navy" /> ชาย
+            </label>
+            <label class="flex items-center gap-1.5 text-[12.5px] cursor-pointer">
+              <input type="radio" formControlName="gender" value="หญิง" class="accent-navy" /> หญิง
+            </label>
+          </div>
+        </div>
+        <div class="col-span-2">
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1">อายุ (ปี)</label>
+          <input
+            type="text"
+            formControlName="aged"
+            inputmode="numeric"
+            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
+            [ngClass]="{
+              'border-red-400 bg-red-50':
+                referForm.get('aged')?.invalid && referForm.get('aged')?.touched
+            }"
             placeholder="ปี"
           />
         </div>
-      </div>
-    </div>
-
-    <div class="bg-white rounded-xl border border-navy/15 p-4 shadow-sm grid grid-cols-12 gap-3">
-      <div class="col-span-12 border-b border-gray-100 pb-1.5 mb-1">
-        <h3 class="text-[13px] font-bold text-navy flex items-center gap-1.5">
-          ข้อมูลผู้ป่วยและสิทธิการรักษา
-        </h3>
-      </div>
-      <div class="col-span-4">
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
-          >ชื่อ - สกุล ผู้ป่วย</label
-        >
-        <input
-          type="text"
-          class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
-          placeholder="นาย / นาง / นางสาว ..."
-        />
-      </div>
-      <div class="col-span-4">
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
-          >เลขบัตรประจำตัวประชาชน</label
-        >
-        <input
-          type="text"
-          class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
-          placeholder="X-XXXX-XXXXX-XX-X"
-        />
-      </div>
-      <div class="col-span-2">
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1">เพศ</label>
-        <div class="flex items-center gap-4 h-[38px]">
-          <label class="flex items-center gap-1.5 text-[12.5px] cursor-pointer"
-            ><input type="radio" name="gender" class="accent-navy" /> ชาย</label
+        <div class="col-span-8">
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
+            >ที่อยู่ปัจจุบันของผู้ป่วย</label
           >
-          <label class="flex items-center gap-1.5 text-[12.5px] cursor-pointer"
-            ><input type="radio" name="gender" class="accent-navy" /> หญิง</label
+          <input
+            type="text"
+            formControlName="p_address"
+            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
+            [ngClass]="{
+              'border-red-400 bg-red-50':
+                referForm.get('p_address')?.invalid && referForm.get('p_address')?.touched
+            }"
+            placeholder="บ้านเลขที่, หมู่ที่, ตำบล, อำเภอ..."
+          />
+        </div>
+        <div class="col-span-4">
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1">เบอร์โทรศัพท์</label>
+          <input
+            type="text"
+            formControlName="tel"
+            inputmode="tel"
+            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
+            [ngClass]="{
+              'border-red-400 bg-red-50':
+                referForm.get('tel')?.invalid && referForm.get('tel')?.touched
+            }"
+            placeholder="ระบุเบอร์โทรศัพท์"
+          />
+        </div>
+        <div class="col-span-12 mt-1">
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1.5">สิทธิการรักษา</label>
+          <div
+            class="flex flex-wrap gap-5 bg-gray-50 p-2.5 rounded-lg border border-gray-100"
+            [ngClass]="{
+              'border-red-300 bg-red-50':
+                referForm.get('bene_type')?.invalid && referForm.get('bene_type')?.touched
+            }"
           >
+            <label class="flex items-center gap-2 text-[12.5px] cursor-pointer">
+              <input type="radio" formControlName="bene_type" value="บัตรทอง" class="accent-navy" />
+              บัตรทอง
+            </label>
+            <label class="flex items-center gap-2 text-[12.5px] cursor-pointer">
+              <input
+                type="radio"
+                formControlName="bene_type"
+                value="ประกันสังคม"
+                class="accent-navy"
+              />
+              ประกันสังคม
+            </label>
+            <label class="flex items-center gap-2 text-[12.5px] cursor-pointer">
+              <input
+                type="radio"
+                formControlName="bene_type"
+                value="ข้าราชการ"
+                class="accent-navy"
+              />
+              ข้าราชการ
+            </label>
+            <div class="flex items-center gap-2 text-[12.5px]">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" formControlName="bene_type" value="อื่นๆ" class="accent-navy" />
+                อื่นๆ
+              </label>
+              <input
+                type="text"
+                (input)="onCustomBeneChange($event)"
+                class="border-b border-navy/30 bg-transparent px-1 pb-0.5 text-[12px] outline-none focus:border-gold w-[150px] disabled:opacity-40"
+                placeholder="ระบุสิทธิอื่นๆ..."
+                [disabled]="referForm.get('bene_type')?.value !== 'อื่นๆ'"
+              />
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-span-2">
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1">อายุ (ปี)</label>
-        <input
-          type="number"
-          class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
-          placeholder="ปี"
-        />
-      </div>
-      <div class="col-span-8">
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
-          >ที่อยู่ปัจจุบันของผู้ป่วย</label
-        >
-        <input
-          type="text"
-          class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
-          placeholder="บ้านเลขที่, หมู่ที่, ตำบล, อำเภอ..."
-        />
-      </div>
-      <div class="col-span-4">
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1">เบอร์โทรศัพท์</label>
-        <input
-          type="text"
-          class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
-          placeholder="ระบุเบอร์โทรศัพท์"
-        />
-      </div>
-      <div class="col-span-12 mt-1">
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1.5">สิทธิการรักษา</label>
-        <div class="flex flex-wrap gap-5 bg-gray-50 p-2.5 rounded-lg border border-gray-100">
-          <label class="flex items-center gap-2 text-[12.5px] cursor-pointer"
-            ><input type="radio" name="benefit" class="accent-navy" /> บัตรทอง</label
+
+      <div class="bg-white rounded-xl border border-navy/15 p-4 shadow-sm space-y-3">
+        <div class="border-b border-gray-100 pb-1.5 mb-1">
+          <h3 class="text-[13px] font-bold text-navy flex items-center gap-1.5">
+            ข้อมูลทางการแพทย์และการตรวจวินิจฉัย
+          </h3>
+        </div>
+        <div>
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
+            >อาการสำคัญ (Chief Complaint)</label
           >
-          <label class="flex items-center gap-2 text-[12.5px] cursor-pointer"
-            ><input type="radio" name="benefit" class="accent-navy" /> ประกันสังคม</label
+          <textarea
+            formControlName="complaint"
+            rows="2"
+            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold resize-none"
+            [ngClass]="{
+              'border-red-400 bg-red-50':
+                referForm.get('complaint')?.invalid && referForm.get('complaint')?.touched
+            }"
+            placeholder="ระบุอาการสำคัญที่นำส่ง..."
+          ></textarea>
+        </div>
+        <div>
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
+            >ประวัติปัจจุบัน (Present Illness)</label
           >
-          <label class="flex items-center gap-2 text-[12.5px] cursor-pointer"
-            ><input type="radio" name="benefit" class="accent-navy" /> ข้าราชการ</label
-          >
-          <div class="flex items-center gap-2 text-[12.5px]">
-            <label class="flex items-center gap-2 cursor-pointer"
-              ><input type="radio" name="benefit" class="accent-navy" /> อื่นๆ</label
+          <textarea
+            formControlName="pre_ill"
+            rows="2"
+            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold resize-none"
+            [ngClass]="{
+              'border-red-400 bg-red-50':
+                referForm.get('pre_ill')?.invalid && referForm.get('pre_ill')?.touched
+            }"
+            placeholder="ระบุประวัติปัจจุบัน..."
+          ></textarea>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
+              >ประวัติการเจ็บป่วยเดิม (Past History)</label
             >
             <input
               type="text"
-              class="border-b border-navy/30 bg-transparent px-1 pb-0.5 text-[12px] outline-none focus:border-gold w-[150px]"
-              placeholder="ระบุสิทธิอื่นๆ..."
+              formControlName="past_ill"
+              class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
+              placeholder="ระบุโรคประจำตัวหรือประวัติเดิม (ถ้ามี)"
             />
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="bg-white rounded-xl border border-navy/15 p-4 shadow-sm space-y-3">
-      <div class="border-b border-gray-100 pb-1.5 mb-1">
-        <h3 class="text-[13px] font-bold text-navy flex items-center gap-1.5">
-          ข้อมูลทางการแพทย์และการตรวจวินิจฉัย
-        </h3>
-      </div>
-      <div>
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
-          >อาการสำคัญ (Chief Complaint)</label
-        >
-        <textarea
-          rows="2"
-          class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold resize-none"
-          placeholder="ระบุอาการสำคัญที่นำส่ง..."
-        ></textarea>
-      </div>
-      <div>
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
-          >ประวัติปัจจุบัน (Present Illness)</label
-        >
-        <textarea
-          rows="2"
-          class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold resize-none"
-          placeholder="ระบุประวัติปัจจุบัน..."
-        ></textarea>
-      </div>
-      <div class="grid grid-cols-2 gap-3">
-        <div>
-          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
-            >ประวัติการเจ็บป่วยเดิม (Past History)</label
-          >
-          <input
-            type="text"
-            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
-            placeholder="ระบุโรคประจำตัวหรือประวัติเดิม (ถ้ามี)"
-          />
-        </div>
-        <div>
-          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
-            >ประวัติแพ้ยา/อาหาร</label
-          >
-          <input
-            type="text"
-            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
-            placeholder="ระบุประวัติการแพ้ยา/อาหาร "
-          />
-        </div>
-      </div>
-      <div class="grid grid-cols-3 gap-3 pt-1">
-        <div>
-          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
-            >ผลการตรวจร่างกาย</label
-          >
-          <input
-            type="text"
-            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
-            placeholder="ผลการตรวจร่างกาย"
-          />
-        </div>
-        <div>
-          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
-            >ผลตรวจทางห้องปฏิบัติการ (ถ้ามี)</label
-          >
-          <input
-            type="text"
-            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
-            placeholder="ระบุผลแล็บเพิ่มเติม"
-          />
-        </div>
-        <div>
-          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
-            >การวินิจฉัยเบื้องต้น</label
-          >
-          <input
-            type="text"
-            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
-            placeholder="ระบุโรคหรือกลุ่มอาการเบื้องต้น"
-          />
-        </div>
-      </div>
-    </div>
-
-    <div class="bg-white rounded-xl border border-navy/15 p-4 shadow-sm grid grid-cols-12 gap-3">
-      <div class="col-span-12 border-b border-gray-100 pb-1.5 mb-1">
-        <h3 class="text-[13px] font-bold text-navy flex items-center gap-1.5">
-          การรักษาเบื้องต้นและเหตุผลความเร่งด่วน
-        </h3>
-      </div>
-      <div class="col-span-6">
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
-          >การรักษา/ยาที่ได้ดำเนินการไปแล้ว</label
-        >
-        <input
-          type="text"
-          class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
-          placeholder="ระบุการให้ยาหรือหัตถการเบื้องต้น"
-        />
-      </div>
-      <div class="col-span-6">
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
-          >การตอบสนองต่อการรักษา</label
-        >
-        <input
-          type="text"
-          class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
-          placeholder="ผลของการตอบสนองต่อการรักษา"
-        />
-      </div>
-
-      <div class="col-span-7 mt-1">
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1.5"
-          >เหตุผลในการส่งต่อ</label
-        >
-        <div class="grid grid-cols-2 gap-2 bg-gray-50 p-2.5 rounded-lg border border-gray-100">
-          <label class="flex items-center gap-2 text-[12.5px] cursor-pointer"
-            ><input type="checkbox" class="accent-navy" /> เกินศักยภาพหน่วยบริการ</label
-          >
-          <label class="flex items-center gap-2 text-[12.5px] cursor-pointer"
-            ><input type="checkbox" class="accent-navy" /> ต้องการตรวจวินิจฉัยเพิ่มเติม</label
-          >
-          <label class="flex items-center gap-2 text-[12.5px] cursor-pointer"
-            ><input type="checkbox" class="accent-navy" /> ต้องการแพทย์เฉพาะทาง</label
-          >
-          <div class="flex items-center gap-2 text-[12.5px]">
-            <label class="flex items-center gap-2 cursor-pointer"
-              ><input type="checkbox" class="accent-navy" /> อื่นๆ</label
+          <div>
+            <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
+              >ประวัติแพ้ยา/อาหาร</label
             >
             <input
               type="text"
-              class="border-b border-navy/30 bg-transparent px-1 pb-0.5 text-[11.5px] outline-none focus:border-gold flex-1 min-w-[100px]"
-              placeholder="ระบุสาเหตุอื่นๆ..."
+              formControlName="allergy"
+              class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
+              placeholder="ระบุประวัติการแพ้ยา/อาหาร "
             />
           </div>
         </div>
-      </div>
-
-      <div class="col-span-5 mt-1">
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1.5"
-          >ระดับความเร่งด่วน</label
-        >
-        <div
-          class="flex gap-4 bg-gray-50 p-2.5 rounded-lg border border-gray-100 h-[74px] items-center justify-around"
-        >
-          <label
-            class="flex items-center gap-2 text-[12.5px] font-medium text-emerald-700 cursor-pointer"
-          >
-            <input type="radio" name="triage" class="accent-emerald-700" /> ปกติ
-          </label>
-          <label
-            class="flex items-center gap-2 text-[12.5px] font-medium text-amber-600 cursor-pointer"
-          >
-            <input type="radio" name="triage" class="accent-amber-600" /> เร่งด่วน
-          </label>
-          <label
-            class="flex items-center gap-2 text-[12.5px] font-bold text-red-600 cursor-pointer"
-          >
-            <input type="radio" name="triage" class="accent-red-600" /> ฉุกเฉิน
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <div class="bg-white rounded-xl border border-navy/15 p-4 shadow-sm grid grid-cols-12 gap-3">
-      <div class="col-span-12 border-b border-gray-100 pb-1.5 mb-1">
-        <h3 class="text-[13px] font-bold text-navy flex items-center gap-1.5">
-          การนำส่งตัวผู้ป่วยและเอกสารแนบ
-        </h3>
-      </div>
-      <div class="col-span-4">
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
-          >ส่งต่อไปยังโรงพยาบาล</label
-        >
-        <input
-          type="text"
-          class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
-          placeholder="ระบุ โรงพยาบาล ปลายทางที่ประสานงาน"
-        />
-      </div>
-      <div class="col-span-4">
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1">วิธีการนำส่งต่อ</label>
-        <div class="flex items-center gap-4 h-[38px]">
-          <label class="flex items-center gap-1.5 text-[12.5px] cursor-pointer"
-            ><input type="radio" name="transport" class="accent-navy" /> ผู้ป่วยไปเอง</label
-          >
-          <label class="flex items-center gap-1.5 text-[12.5px] cursor-pointer"
-            ><input type="radio" name="transport" class="accent-navy" /> รถพยาบาลนำส่ง</label
-          >
-        </div>
-      </div>
-      <div class="col-span-4">
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
-          >ผู้ติดตามผู้ป่วย (ถ้ามี)</label
-        >
-        <input
-          type="text"
-          class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
-          placeholder="ชื่อผู้ติดตาม"
-        />
-      </div>
-      <div class="col-span-12 mt-1">
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1.5">เอกสารแนบ</label>
-        <div class="flex gap-6 bg-gray-50 p-2.5 rounded-lg border border-gray-100">
-          <label class="flex items-center gap-1.5 text-[12.5px] cursor-pointer"
-            ><input type="checkbox" class="accent-navy" /> ใบผลตรวจ</label
-          >
-          <label class="flex items-center gap-1.5 text-[12.5px] cursor-pointer"
-            ><input type="checkbox" class="accent-navy" /> ใบยา</label
-          >
-          <label class="flex items-center gap-1.5 text-[12.5px] cursor-pointer"
-            ><input type="checkbox" class="accent-navy" /> เอกซเรย์
-          </label>
-          <div class="flex items-center gap-2 text-[12.5px]">
-            <label class="flex items-center gap-2 cursor-pointer"
-              ><input type="checkbox" class="accent-navy" /> อื่นๆ</label
+        <div class="grid grid-cols-3 gap-3 pt-1">
+          <div>
+            <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
+              >สัญญาณชีพ (Vital Sign)</label
             >
             <input
               type="text"
-              class="border-b border-navy/30 bg-transparent px-1 pb-0.5 text-[11.5px] outline-none focus:border-gold flex-1 min-w-[100px]"
-              placeholder="ระบุสาเหตุอื่นๆ..."
+              formControlName="vital_sign"
+              class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
+              [ngClass]="{
+                'border-red-400 bg-red-50':
+                  referForm.get('vital_sign')?.invalid && referForm.get('vital_sign')?.touched
+              }"
+              placeholder="เช่น BP 120/80, PR 80, RR 20"
+            />
+          </div>
+          <div>
+            <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
+              >การวินิจฉัยเบื้องต้น</label
+            >
+            <input
+              type="text"
+              formControlName="initial_diag"
+              class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
+              [ngClass]="{
+                'border-red-400 bg-red-50':
+                  referForm.get('initial_diag')?.invalid && referForm.get('initial_diag')?.touched
+              }"
+              placeholder="ระบุโรคหรือกลุ่มอาการเบื้องต้น"
             />
           </div>
         </div>
-        <div
-          class="flex flex-wrap items-center gap-3 bg-gray-50/50 p-2 px-3 rounded-lg border border-gray-100 [.is-review-mode_&]:bg-transparent [.is-review-mode_&]:border-transparent [.is-review-mode_&]:p-0"
-        >
-          <div class="relative shrink-0 block">
-            <input
-              type="file"
-              multiple
-              class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-            />
-            <button
-              type="button"
-              class="border border-dashed border-navy/30 text-navy bg-white hover:border-gold hover:text-gold rounded-md p-1 px-2.5 text-[11.5px] font-bold flex items-center gap-1 transition-colors"
-            >
-              <i class="ti ti-paperclip text-[13px]"></i> แนบไฟล์เอกสาร
-            </button>
+      </div>
+
+      <div class="bg-white rounded-xl border border-navy/15 p-4 shadow-sm grid grid-cols-12 gap-3">
+        <div class="col-span-12 border-b border-gray-100 pb-1.5 mb-1">
+          <h3 class="text-[13px] font-bold text-navy flex items-center gap-1.5">
+            การรักษาเบื้องต้นและเหตุผลความเร่งด่วน
+          </h3>
+        </div>
+        <div class="col-span-6">
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
+            >การรักษา/ยาที่ได้ดำเนินการไปแล้ว</label
+          >
+          <input
+            type="text"
+            formControlName="pre_treat"
+            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
+            [ngClass]="{
+              'border-red-400 bg-red-50':
+                referForm.get('pre_treat')?.invalid && referForm.get('pre_treat')?.touched
+            }"
+            placeholder="ระบุการให้ยาหรือหัตถการเบื้องต้น"
+          />
+        </div>
+        <div class="col-span-6">
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
+            >การตอบสนองต่อการรักษา</label
+          >
+          <input
+            type="text"
+            formControlName="res_treat"
+            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
+            [ngClass]="{
+              'border-red-400 bg-red-50':
+                referForm.get('res_treat')?.invalid && referForm.get('res_treat')?.touched
+            }"
+            placeholder="ผลของการตอบสนองต่อการรักษา"
+          />
+        </div>
+        <div class="col-span-7 mt-1">
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1.5"
+            >เหตุผลในการส่งต่อ</label
+          >
+          <div
+            class="grid grid-cols-2 gap-2 bg-gray-50 p-2.5 rounded-lg border border-gray-100"
+            [ngClass]="{
+              'border-red-300 bg-red-50':
+                referForm.get('reason_refer')?.invalid && referForm.get('reason_refer')?.touched
+            }"
+          >
+            <label class="flex items-center gap-2 text-[12.5px] cursor-pointer">
+              <input
+                type="radio"
+                formControlName="reason_refer"
+                value="เกินศักยภาพหน่วยบริการ"
+                class="accent-navy"
+              />
+              เกินศักยภาพหน่วยบริการ
+            </label>
+            <label class="flex items-center gap-2 text-[12.5px] cursor-pointer">
+              <input
+                type="radio"
+                formControlName="reason_refer"
+                value="ต้องการตรวจวินิจฉัยเพิ่มเติม"
+                class="accent-navy"
+              />
+              ต้องการตรวจวินิจฉัยเพิ่มเติม
+            </label>
+            <label class="flex items-center gap-2 text-[12.5px] cursor-pointer">
+              <input
+                type="radio"
+                formControlName="reason_refer"
+                value="ต้องการแพทย์เฉพาะทาง"
+                class="accent-navy"
+              />
+              ต้องการแพทย์เฉพาะทาง
+            </label>
+            <div class="flex items-center gap-2 text-[12.5px]">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  formControlName="reason_refer"
+                  #reasonOtherRadio
+                  value="อื่นๆ"
+                  class="accent-navy"
+                />
+                อื่นๆ
+              </label>
+              <input
+                type="text"
+                #customReasonInput
+                (input)="onCustomReasonChange($event)"
+                class="border-b border-navy/30 bg-transparent px-1 pb-0.5 text-[11.5px] outline-none focus:border-gold flex-1 min-w-[100px] disabled:opacity-40"
+                placeholder="ระบุสาเหตุอื่นๆ..."
+                [disabled]="referForm.get('reason_refer')?.value !== 'อื่นๆ'"
+              />
+            </div>
           </div>
-
-
-          <div class="flex flex-wrap gap-2 flex-1 items-center">
-            <!-- <div
-              class="flex items-center gap-1.5 bg-white border border-navy/10 rounded-md p-1 px-2 shadow-2xs max-w-[240px]"
+        </div>
+        <div class="col-span-5 mt-1">
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1.5"
+            >ระดับความเร่งด่วน</label
+          >
+          <div
+            class="flex gap-4 bg-gray-50 p-2.5 rounded-lg border border-gray-100 h-[42px] items-center justify-around"
+            [ngClass]="{
+              'border-red-300 bg-red-50':
+                referForm.get('triage_level')?.invalid && referForm.get('triage_level')?.touched
+            }"
+          >
+            <label
+              class="flex items-center gap-2 text-[12.5px] font-medium text-emerald-700 cursor-pointer"
             >
-              <span class="text-red-600 text-[13px] shrink-0 flex items-center"
-                ><i class="ti ti-file-type-pdf"></i
-              ></span>
-              <span class="text-[11.5px] font-medium text-navy/90 truncate"
-                >ผลตรวจเลือด_CBC.pdf</span
-              >
-              <span class="text-[10px] text-navy/40 shrink-0">(1.2MB)</span>
+              <input
+                type="radio"
+                formControlName="triage_level"
+                value="1"
+                class="accent-emerald-700"
+              />
+              ปกติ
+            </label>
+            <label
+              class="flex items-center gap-2 text-[12.5px] font-medium text-amber-600 cursor-pointer"
+            >
+              <input
+                type="radio"
+                formControlName="triage_level"
+                value="2"
+                class="accent-amber-600"
+              />
+              เร่งด่วน
+            </label>
+            <label
+              class="flex items-center gap-2 text-[12.5px] font-bold text-red-600 cursor-pointer"
+            >
+              <input type="radio" formControlName="triage_level" value="3" class="accent-red-600" />
+              ฉุกเฉิน
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl border border-navy/15 p-4 shadow-sm grid grid-cols-12 gap-3">
+        <div class="col-span-12 border-b border-gray-100 pb-1.5 mb-1">
+          <h3 class="text-[13px] font-bold text-navy flex items-center gap-1.5">
+            การนำส่งตัวผู้ป่วยและเอกสารแนบ
+          </h3>
+        </div>
+        <div class="col-span-4">
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1">วิธีการนำส่งต่อ</label>
+          <div
+            class="flex items-center gap-4 h-[38px]"
+            [ngClass]="{
+              'border-red-300 bg-red-50 rounded-lg':
+                referForm.get('transport_type')?.invalid &&
+                referForm.get('transport_type')?.touched
+            }"
+          >
+            <label class="flex items-center gap-1.5 text-[12.5px] cursor-pointer">
+              <input
+                type="radio"
+                formControlName="transport_type"
+                value="ผู้ป่วยไปเอง"
+                class="accent-navy"
+              />
+              ผู้ป่วยไปเอง
+            </label>
+            <label class="flex items-center gap-1.5 text-[12.5px] cursor-pointer">
+              <input
+                type="radio"
+                formControlName="transport_type"
+                value="รถพยาบาลนำส่ง"
+                class="accent-navy"
+              />
+              รถพยาบาลนำส่ง
+            </label>
+          </div>
+        </div>
+        <div class="col-span-8">
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
+            >ผู้ติดตามผู้ป่วย / ผู้ควบคุมระหว่างส่งต่อ</label
+          >
+          <input
+            type="text"
+            formControlName="transport_follow"
+            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
+            [ngClass]="{
+              'border-red-400 bg-red-50':
+                referForm.get('transport_follow')?.invalid &&
+                referForm.get('transport_follow')?.touched
+            }"
+            placeholder="ชื่อผู้ติดตาม หรือ เจ้าหน้าที่ผู้ควบคุมดูแล"
+          />
+        </div>
+        <div class="col-span-12 mt-1">
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1.5"
+            >เอกสารดิจิทัลแนบระบบ</label
+          >
+          <div
+            class="flex flex-wrap items-center gap-3 bg-gray-50/50 p-2 px-3 rounded-lg border border-gray-100"
+          >
+            <div class="relative shrink-0 block">
+              <input
+                type="file"
+                multiple
+                accept="application/pdf"
+                (change)="onFileChange($event)"
+                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+              />
               <button
                 type="button"
-                class="text-navy/30 hover:text-red-600 cursor-pointer p-0.5 ml-0.5 transition-colors block [.is-review-mode_&]:hidden"
-                onclick="console.log('ลบไฟล์')"
+                class="border border-dashed border-navy/30 text-navy bg-white hover:border-gold hover:text-gold rounded-md p-1 px-2.5 text-[11.5px] font-bold flex items-center gap-1 transition-colors"
               >
-                <i class="ti ti-x text-[10px]"></i>
+                <i class="ti ti-paperclip text-[13px]"></i> แนบไฟล์เอกสาร (.PDF)
               </button>
-            </div> -->
+            </div>
+            <div class="flex flex-wrap gap-2 flex-1 items-center">
+              <div
+                *ngFor="let file of selectedFiles; let i = index"
+                class="flex items-center gap-1.5 bg-white border border-navy/10 rounded-md p-1 px-2 shadow-2xs max-w-[240px]"
+              >
+                <span
+                  [ngClass]="file.type.includes('pdf') ? 'text-red-600' : 'text-blue-600'"
+                  class="text-[13px] shrink-0 flex items-center"
+                >
+                  <i
+                    [ngClass]="
+                      file.type.includes('pdf') ? 'ti ti-file-type-pdf' : 'ti ti-file-text'
+                    "
+                  ></i>
+                </span>
+                <span class="text-[11.5px] font-medium text-navy/90 truncate" [title]="file.name">{{
+                  file.name
+                }}</span>
+                <span class="text-[10px] text-navy/40 shrink-0"
+                  >({{ formatFileSize(file.size) }})</span
+                >
+                <button
+                  type="button"
+                  (click)="removeFile(i)"
+                  class="text-navy/30 hover:text-red-600 cursor-pointer p-0.5 ml-0.5 transition-colors block"
+                >
+                  <i class="ti ti-x text-[10px]"></i>
+                </button>
+              </div>
+            </div>
           </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl border border-navy/15 p-4 shadow-sm grid grid-cols-3 gap-3">
+        <div class="col-span-3 border-b border-gray-100 pb-1.5 mb-1">
+          <h3 class="text-[13px] font-bold text-navy flex items-center gap-1.5">
+            ข้อมูลเจ้าหน้าที่ผู้ลงนามส่งต่อ
+          </h3>
+        </div>
+        <div>
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
+            >ลงชื่อ (ชื่อ-นามสกุล)</label
+          >
+          <input
+            type="text"
+            formControlName="provider_name"
+            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
+            [ngClass]="{
+              'border-red-400 bg-red-50':
+                referForm.get('provider_name')?.invalid && referForm.get('provider_name')?.touched
+            }"
+            placeholder="ระบุชื่อผู้บันทึก"
+          />
+        </div>
+        <div>
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1">ตำแหน่ง</label>
+          <input
+            type="text"
+            formControlName="provider_position"
+            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
+            [ngClass]="{
+              'border-red-400 bg-red-50':
+                referForm.get('provider_position')?.invalid &&
+                referForm.get('provider_position')?.touched
+            }"
+            placeholder="ระบุตำแหน่ง"
+          />
+        </div>
+        <div>
+          <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
+            >เบอร์โทรศัพท์ติดต่อโดยตรง</label
+          >
+          <input
+            type="text"
+            formControlName="provider_tel"
+            inputmode="tel"
+            class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
+            [ngClass]="{
+              'border-red-400 bg-red-50':
+                referForm.get('provider_tel')?.invalid && referForm.get('provider_tel')?.touched
+            }"
+            placeholder="ระบุเบอร์โทร"
+          />
         </div>
       </div>
     </div>
 
-    <div class="bg-white rounded-xl border border-navy/15 p-4 shadow-sm grid grid-cols-3 gap-3">
-      <div class="col-span-3 border-b border-gray-100 pb-1.5 mb-1">
-        <h3 class="text-[13px] font-bold text-navy flex items-center gap-1.5">
-          ข้อมูลเจ้าหน้าที่ผู้ลงนามส่งต่อ
-        </h3>
-      </div>
-      <div>
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
-          >ลงชื่อ (ชื่อ-นามสกุล)</label
+    <div
+      class="border-t border-navy/10 pt-3 flex justify-between items-center shrink-0 bg-[#f4f7fb] mt-2"
+    >
+      <p class="text-[11px] text-navy/60 font-medium">
+        หมายเหตุ: โปรดรับผู้ป่วยรายนี้เพื่อการวินิจฉัยและรักษาต่อ
+      </p>
+      <div class="flex justify-end gap-3">
+        <button
+          type="button"
+          (click)="onCancel()"
+          [disabled]="isSubmitting"
+          class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-[13px] font-bold transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         >
-        <input
-          type="text"
-          class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
-          placeholder="ระบุชื่อผู้บันทึก"
-        />
-      </div>
-      <div>
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1">ตำแหน่ง</label>
-        <input
-          type="text"
-          class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
-          placeholder="ระบุตำแหน่ง"
-        />
-      </div>
-      <div>
-        <label class="block text-[11.5px] font-semibold text-navy/80 mb-1"
-          >เบอร์โทรศัพท์ติดต่อโดยตรง</label
+          ยกเลิก/ล้างฟอร์ม
+        </button>
+        <button
+          type="submit"
+          [disabled]="isSubmitting"
+          class="px-5 py-2 bg-navy hover:bg-navy/90 text-white rounded-lg text-[13px] font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
         >
-        <input
-          type="text"
-          class="w-full border border-navy/20 rounded-lg p-2 text-[12.5px] outline-none focus:border-gold"
-          placeholder="ระบุเบอร์โทร"
-        />
+          <i class="ti ti-send text-[14px]"></i> ส่งใบส่งตัวผู้ป่วย
+        </button>
       </div>
     </div>
-  </div>
-
-  <div class="border-t border-navy/10 pt-3 flex justify-between items-center shrink-0 bg-[#f4f7fb]">
-    <p class="text-[11px] text-navy/60 font-medium">
-      หมายเหตุ: โปรดรับผู้ป่วยรายนี้เพื่อการวินิจฉัยและรักษาต่อ
-    </p>
-    <div class="flex gap-2">
-      <button
-        class="border border-navy/30 text-red-500 bg-white rounded-lg px-5 py-2 text-[12.5px] font-bold cursor-pointer hover:bg-red-200 hover:border"
-      >
-        ยกเลิก
-      </button>
-      <button
-        class="bg-navy text-white rounded-lg px-6 py-2 text-[12.5px] font-bold cursor-pointer hover:bg-navy-light border-b-2 border-gold shadow-sm flex items-center gap-1.5 transition-colors"
-      >
-        บันทึกใบส่งตัว
-      </button>
-    </div>
-  </div>
+  </form>
 </div>
